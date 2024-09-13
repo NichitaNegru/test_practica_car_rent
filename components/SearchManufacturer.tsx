@@ -2,7 +2,7 @@
 
 import { useState, Fragment } from 'react';
 import Image from 'next/image';
-import {Combobox, Transition } from '@headlessui/react'
+import {Combobox, ComboboxButton, ComboboxOption, ComboboxOptions, Transition } from '@headlessui/react'
 
 import { manufacturers } from '@/constants';
 import { SearchManufacturerProps } from '@/types'
@@ -26,7 +26,7 @@ const SearchManufacturer = ({manufacturer, setManufacturer} : SearchManufacturer
     <div className="search-manufacturer">
       <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className="relative w-full">
-          <Combobox.Button className="absolute top-[14px]">
+          <ComboboxButton className="absolute top-[14px]">
             <Image 
             src="/car-logo.svg"
             width={20}
@@ -35,7 +35,7 @@ const SearchManufacturer = ({manufacturer, setManufacturer} : SearchManufacturer
             alt="Car Logo"
             />
             
-          </Combobox.Button>
+          </ComboboxButton>
 
           <Combobox.Input 
           className="search-manufacturer__input"
@@ -52,18 +52,18 @@ const SearchManufacturer = ({manufacturer, setManufacturer} : SearchManufacturer
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
             >
-              <Combobox.Options>
+              <ComboboxOptions>
                 {filteredManufacturers.length === 0 && query !== "" ? (
-                  <Combobox.Option 
+                  <ComboboxOption 
                   value={query}
                   className=
                   "search_manufacturer__option"
                   >
                     Create "{query}"
-                  </Combobox.Option>
+                  </ComboboxOption>
                 ): (
                   filteredManufacturers.map((item) => (
-                    <Combobox.Option
+                    <ComboboxOption
                     key={item}
                     className={({active}) => `
                     relative search-manufacturer__option
@@ -91,10 +91,10 @@ const SearchManufacturer = ({manufacturer, setManufacturer} : SearchManufacturer
                         ) : null}
                         </>
                   )}
-                    </Combobox.Option>
+                    </ComboboxOption>
                   ))
                 )}
-              </Combobox.Options>
+              </ComboboxOptions>
           </Transition>
         </div>
       </Combobox>
